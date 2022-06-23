@@ -1,9 +1,14 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 const Main = () => {
     const [start, setStart] = useState("출발지");
     const [arrival, setArrival] = useState("도착지");
     const [daegu, setDaegu] = useState("선택");
+    const [data1, setData1] = useState([])
+
+    useEffect(async () => {
+	setData1((await fetch('/api/1').then((res) => res.text())).split(','))
+    }, [])
 
     const SChange = (e) => {
         setStart(e.target.value)
@@ -52,7 +57,6 @@ const Main = () => {
             {arrival === "대구" ?
                 <select name="arrival" onChange={DChange} onChangeCapture={DChange}>
                     <option value="선택">선택</option>
-                    <option value="동대구">동대구</option>
                     <option value="북대구">북대구</option>
                 </select>
 
@@ -99,7 +103,9 @@ const Main = () => {
                         <ul>
                             <br />
                             <label>(의성 시외 버스터미널)</label>
-                            <hr />
+                			    <br />
+			    <label>{new Date().getMonth() + 1}월 {new Date().getDate()}일</label>	
+            <hr />
                             <li>시간</li>
                             <label>잔여좌석 / 총좌석</label>
                             <hr />
@@ -134,7 +140,9 @@ const Main = () => {
                         <ul>
                             <br />
                             <label>(의성 시외 버스터미널)</label>
-                            <hr />
+        			    <br />
+			    <label>{new Date().getMonth() + 1}월 {new Date().getDate()}일</label>	
+                    <hr />
                             <li>시간</li>
                             <label>잔여좌석 / 총좌석</label>
                             <br />
@@ -155,21 +163,23 @@ const Main = () => {
                         <ul>
                             <br />
                             <label>(도리원 시외 버스정류장)</label>
-                            <hr />
+ 			    <br />
+			    <label>{new Date().getMonth() + 1}월 {new Date().getDate()}일</label>	
+                           <hr />
                             <li>시간</li>
                             <label>잔여좌석 / 총좌석</label>
                             <hr />
                             <li>08 : 50</li>
-                            <label>31석 / 총 41석</label>
+                            <label>{data1[0]}</label>
                             <hr />
                             <li>12 : 20</li>
-                            <label>35석 / 총 41석</label>
+                            <label>{data1[1]}</label>
                             <hr />
                             <li>17 : 00 </li>
-                            <label>34석 / 총 41석</label>
+                            <label>{data1[2]}</label>
                             <hr />
                             <li>21 : 00</li>
-                            <label>32석 / 총 41석</label>
+                            <label>{data1[3]}</label>
                             <hr />
                         </ul>
                     </div>

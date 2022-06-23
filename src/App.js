@@ -9,7 +9,7 @@ const App = () => {
   return (
     <div className="main">
       <div className="head">
-        <Link to="/"><h1 className="title">의성 종합 버스 서비스</h1></Link>
+        <Link to="/"><h1 className="title">의성 버스 서비스</h1></Link>
 
       </div>
       <div className="body">
