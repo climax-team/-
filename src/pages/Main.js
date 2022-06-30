@@ -4,10 +4,18 @@ const Main = () => {
     const [start, setStart] = useState("출발지");
     const [arrival, setArrival] = useState("도착지");
     const [daegu, setDaegu] = useState("선택");
-    const [data1, setData1] = useState([])
+    const [data1, setData1] = useState([]);
+    const [data2, setData2] = useState([]);
+    const [data3, setData3] = useState([]);
+    const [data4, setData4] = useState([]);
+    const [data5, setData5] = useState([]);
 
     useEffect(async () => {
-	setData1((await fetch('/api/1').then((res) => res.text())).split(','))
+	setData1((await fetch('/api/1').then((res) => res.text())).split(','))//도리원-구미
+	setData2((await fetch('/api/2').then((res) => res.text())).split(','))//도리원-인천
+	setData3((await fetch('/api/3').then((res) => res.text())).split(','))//도리원-서울
+	setData4((await fetch('/api/4').then((res) => res.text())).split(','))//의성-동대구
+	setData5((await fetch('/api/5').then((res) => res.text())).split(','))//의성-북대구
     }, [])
 
     const SChange = (e) => {
@@ -52,12 +60,14 @@ const Main = () => {
                 <option value="구미">구미</option>
                 <option value="안동">안동</option>
                 <option value="군위">군위</option>
-                <option value="대전">대전</option>
+                <option value="인천">인천</option>
+		<option value="대전">대전</option>	
             </select>
             {arrival === "대구" ?
                 <select name="arrival" onChange={DChange} onChangeCapture={DChange}>
                     <option value="선택">선택</option>
                     <option value="북대구">북대구</option>
+		    <option value="동대구">동대구</option>
                 </select>
 
                 :
@@ -77,7 +87,9 @@ const Main = () => {
                         <ul>
                             <br />
                             <label>(의성 시외 버스터미널)</label>
-                            <hr />
+                            <br />
+			    <label>{new Date().getMonth() + 1}월 {new Date().getDate()}일</label>
+			    <hr />
                             <li>시간</li>
                             <label>잔여좌석 / 총좌석</label>
                             <hr />
@@ -103,32 +115,29 @@ const Main = () => {
                         <ul>
                             <br />
                             <label>(의성 시외 버스터미널)</label>
-                			    <br />
-			    <label>{new Date().getMonth() + 1}월 {new Date().getDate()}일</label>	
-            <hr />
+			    <br />
+			    <label>{new Date().getMonth() + 1}월 {new Date().getDate()}일</label>
+			    <hr />
                             <li>시간</li>
                             <label>잔여좌석 / 총좌석</label>
                             <hr />
-                            <li>07 : 10</li>
-                            <label>6석 / 총 41석</label>
-                            <hr />
                             <li>09 : 35</li>
-                            <label>8석 / 총 41석</label>
+                            <label>{data5[0]}</label>
                             <hr />
                             <li>12 : 40</li>
-                            <label>7석 / 총 41석</label>
+                            <label>{data5[1]}</label>
                             <hr />
                             <li>13 : 30</li>
-                            <label>18석 / 총 41석</label>
+                            <label>{data5[2]}</label>
                             <hr />
                             <li>16 : 30</li>
-                            <label>25석 / 총 41석</label>
+                            <label>{data5[3]}</label>
                             <hr />
                             <li>18 : 10</li>
-                            <label>33석 / 총 41석</label>
+                            <label>{data5[4]}</label>
                             <hr />
                             <li>18 : 50</li>
-                            <label>32석 / 총 41석</label>
+                            <label>{data5[5]}</label>
                             <hr />
                         </ul>
                     </div>
@@ -140,18 +149,18 @@ const Main = () => {
                         <ul>
                             <br />
                             <label>(의성 시외 버스터미널)</label>
-        			    <br />
+        		    <br />
 			    <label>{new Date().getMonth() + 1}월 {new Date().getDate()}일</label>	
-                    <hr />
+                            <hr />
                             <li>시간</li>
                             <label>잔여좌석 / 총좌석</label>
                             <br />
                             <hr />
                             <li>11 : 10</li>
-                            <label>28석 / 총 28석</label>
+                            <label>{data4[0]}</label>
                             <hr />
                             <li>12 : 00</li>
-                            <label>28석 / 총 28석</label>
+                            <label>{data4[1]}</label>
                             <hr />
                         </ul>
                     </div>
@@ -191,7 +200,9 @@ const Main = () => {
                         <ul>
                             <br />
                             <label>(도리원 시외 버스터미널)</label>
-                            <hr />
+                            <br />
+			    <label>{new Date().getMonth() + 1}월 {new Date().getDate()}일</label>
+			    <hr />
                             <li>시간</li>
                             <label>잔여좌석 / 총좌석</label>
                             <hr />
@@ -230,21 +241,51 @@ const Main = () => {
                     :
                     <></>
                 }
-                {start === "봉양면" && daegu === "동대구" ?
+                {start === "봉양면" && arrival === "인천" ?
                     <div>
                         <ul>
                             <br />
                             <label>(도리원 시외 버스터미널)</label>
-                            <hr />
+                            <br />
+			    <label>{new Date().getMonth() + 1}월 {new Date().getDate()}일</label>
+			    <hr />
                             <li>시간</li>
                             <label>잔여좌석 / 총좌석</label>
                             <br />
                             <hr />
-                            <li>11 : 10</li>
-                            <label>28석 / 총 28석</label>
+                            <li>08 : 50</li>
+                            <label>{data2[0]}</label>
                             <hr />
-                            <li>12 : 00</li>
-                            <label>28석 / 총 28석</label>
+                            <li>17 : 00</li>
+                            <label>{data2[1]}</label>
+                            <hr />
+                        </ul>
+                    </div>
+                    :
+                    <></>
+                }
+	         {start === "봉양면" && arrival === "서울" ?
+                    <div>
+                        <ul>
+                            <br />
+                            <label>(도리원 시외 버스정류장)</label>
+ 			    <br />
+			    <label>{new Date().getMonth() + 1}월 {new Date().getDate()}일</label>	
+                           <hr />
+                            <li>시간</li>
+                            <label>잔여좌석 / 총좌석</label>
+                            <hr />
+                            <li>07 : 40</li>
+                            <label>{data3[0]}</label>
+                            <hr />
+                            <li>12 : 40</li>
+                            <label>{data3[1]}</label>
+                            <hr />
+                            <li>17 : 40</li>
+                            <label>{data3[2]}</label>
+                            <hr />
+                            <li>18 : 40</li>
+                            <label>{data3[3]}</label>
                             <hr />
                         </ul>
                     </div>
